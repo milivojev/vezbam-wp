@@ -1,2 +1,7 @@
 <?php 
-echo "this is index page";	
+	get_header();
+	?>
+
+
+
+<?php get_footer();?>
