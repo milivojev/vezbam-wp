@@ -11,10 +11,11 @@
     <title><?=custom_title();?> </title>
 
        <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/wp-content/themes/basic-acf-portfolio/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="/wp-content/themes/basic-acf-portfolio/css/modern-business.css" rel="stylesheet">
+
 </head>
 
   <body>
@@ -27,19 +28,16 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <!-- <ul class="navbar-nav ml-auto">
-            <li>
-              <a href="about.html">Home</a>
-            </li>
-            
-          </ul> -->
+          
           <?php
-            wp_nav_menu(){[
+            wp_nav_menu([
             'menu_class'=>'navbar-nav ml-auto',
-            'theme_location'=>'category-menu'
-          ]}
+            'theme_location'=>'main-menu'
+          ]);
           ?>
 
         </div>
       </div>
     </nav>
+
+   
