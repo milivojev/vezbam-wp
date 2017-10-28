@@ -1,15 +1,68 @@
 <?php
 
-	function custom_title(){
-		$name = get_bloginfo('name');
+	// function custom_title(){
+	// 	$name = get_bloginfo('name');
+	// 	$description = get_bloginfo('description');
+	// 	$page_title = wp_title('|',true,'right');
+	// 	return $page_title.$name . " ~ ".$description;
+	// }
+
+
+// dodavanje custom title sa add theme support title tag
+
+add_action( 'after_setup_theme', 'theme_functions' );
+function theme_functions() {
+
+    add_theme_support( 'title-tag' );
+
+}
+
+add_filter( 'wp_title', 'custom_titles', 10, 2 );
+function custom_titles( $title, $sep ) {
+
+    //Check if custom titles are enabled from your option framework
+    if ( ot_get_option( 'enable_custom_titles' ) === 'on' ) {
+        //Some silly example
+        $name = get_bloginfo('name');
 		$description = get_bloginfo('description');
 		$page_title = wp_title('|',true,'right');
-		return $page_title.$name . " ~ ".$description;
-	}
+		$title = $page_title.$name . " ~ ".$description;
+    }
+
+    return $title;
+}
+
+
 add_action('after_setup_theme','custom_menus');
 function custom_menus(){
 	register_nav_menus( [
 		'main-menu'=>'main menu, pages',
 		'category-menu'=>'category menu, sub-header'
 	] );
+}
+
+function excerpt($content,$length = 180){
+	$content = wp_strip_all_tags( $content );
+	$content = substr($content, 0, $length);
+	echo $content;
+}
+
+add_action( 'wp_enqueue_scripts', 'custom_styles');
+function custom_styles(){
+	wp_register_style( 
+		'bootstrap', 
+		get_template_directory_uri()."/vendor/bootstrap/css/bootstrap.min.css",
+		 [],
+		  4.0, 
+		  $media = 'all'
+		   );
+	wp_register_style( 
+		'modern-business',
+		get_template_directory_uri().'css/medern-business.css',
+		['bootstrap'],
+		 1.0,
+		  $media = 'all' );
+	wp_enqueue_style( 'bootstrap' );
+	wp_enqueue_style( 'modern-business' );
+
 }

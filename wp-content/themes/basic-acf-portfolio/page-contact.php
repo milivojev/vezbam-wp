@@ -14,7 +14,7 @@
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="<?php home_url( );?>">Home</a>
+          <a href="<?= home_url( );?>">Home</a>
         </li>
         <li class="breadcrumb-item active">Contact</li>
       </ol>
