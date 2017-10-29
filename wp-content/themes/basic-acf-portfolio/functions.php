@@ -96,3 +96,35 @@ function custom_script(){
 }
 add_image_size('Portfolio Featured',700, 500, true);
 add_image_size('Hero',1920, 1080, true);
+
+/**
+
+     * We all need a debug method. The second parameter is optional
+
+     * and decides if php is set to die after printing the var.
+
+     */
+
+    function dump($input, $die = false) {
+
+        echo '<pre>';
+
+        if (is_bool($input)) {
+
+            var_dump($input);
+
+        } else {
+
+            print_r($input);
+
+        }
+
+        echo '</pre>';
+
+        if ($die) {
+
+            die();
+
+        }
+
+    }
