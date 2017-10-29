@@ -22,12 +22,15 @@
 Write a query that outputs all posts from current category in the category.php template. The order should be by descending created date, so that we always have the newest post on top.
 
 For this query you will need the slug, id or the name of the current category and you can easily get that via $wp_query->get_queried_object() method.
+ 
+Each post should be shown as a row-card, which contains the post name, 180char excerpt and a permalink on the button. We did this same thing in class, so it should be pretty easy by now. Leave the picture the gray default as is for now, as we do not yet have custom fields.
  -->
 
       <!-- Project One -->
       <div class="row">
         <?php
          $curent_category = $wp_query->get_queried_object();
+         
          $curent_category_slug = $curent_category->slug;
           $args =[
             'post_type'=>'post',

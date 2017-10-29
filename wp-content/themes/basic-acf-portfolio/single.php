@@ -1,5 +1,6 @@
 <?php
 get_header();
+the_post();
 ?>
 
 
@@ -60,12 +61,23 @@ get_header();
       </div>
     </nav> --> 
 
+
+    <!-- 
+
+Open your Single Portfolio Item template (single.php)(its the default post template). If you visit any of your portfolio pages that you outputted in the last query, you will notice they have a related projects section in the bottom.
+
+Create a WP Query that returns 3 random posts from the same category.
+
+You will notice that since we only have three posts in each category (courtesy of homework #3), it will always show the same three posts, including the current page. Find a way to remove the current post from the results, so that we only show 2 posts. It is a pretty common procedure, google it.
+ -->
+
     <!-- Page Content -->
     <div class="container">
+    
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Portfolio Item
-        <small>Subheading</small>
+      <h1 class="mt-4 mb-3"><?= get_bloginfo( 'name' );?>
+        <small><?= get_the_title();?></small>
       </h1>
 
       <ol class="breadcrumb">
@@ -84,7 +96,7 @@ get_header();
 
         <div class="col-md-4">
           <h3 class="my-3">Project Description</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+          <p><?= get_the_content();?></p>
           <h3 class="my-3">Project Details</h3>
           <ul>
             <li>Lorem Ipsum</li>
@@ -101,30 +113,30 @@ get_header();
       <h3 class="my-4">Related Projects</h3>
 
       <div class="row">
+        <?php
+        $curent_category_ID = wp_get_post_categories($post->ID);
+       $postid = get_the_ID();
 
+        
+
+          $args = [
+            'post_type'=>'post',
+            'cat'=>$curent_category_ID,
+            'posts_per_page' => 3,
+             'post__not_in' => [$postid]
+          ];
+          $related_projects = new WP_Query($args);
+          while($related_projects->have_posts()):
+          $related_projects->the_post();
+?>
         <div class="col-md-3 col-sm-6 mb-4">
-          <a href="#">
+          <a href="<?=get_permalink(); ?>">
             <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            <?php echo "<h6>".the_title()."</h6>"; ?>
           </a>
         </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-        </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-        </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-        </div>
+<?php endwhile;?>
+        
 
       </div>
       <!-- /.row -->
