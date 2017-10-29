@@ -1,36 +1,36 @@
 <?php
 
-	// function custom_title(){
-	// 	$name = get_bloginfo('name');
-	// 	$description = get_bloginfo('description');
-	// 	$page_title = wp_title('|',true,'right');
-	// 	return $page_title.$name . " ~ ".$description;
-	// }
+	function custom_title(){
+		$name = get_bloginfo('name');
+		$description = get_bloginfo('description');
+		$page_title = wp_title('|',true,'right');
+		return $page_title.$name . " ~ ".$description;
+	}
 
 
 // dodavanje custom title sa add theme support title tag
 
-add_action( 'after_setup_theme', 'theme_functions' );
-function theme_functions() {
+// add_action( 'after_setup_theme', 'theme_functions' );
+// function theme_functions() {
 
-    add_theme_support( 'title-tag' );
+//     add_theme_support( 'title-tag' );
 
-}
+// }
 
-add_filter( 'wp_title', 'custom_titles', 10, 2 );
-function custom_titles( $title, $sep ) {
+// add_filter( 'wp_title', 'custom_titles', 10, 2 );
+// function custom_titles( $title, $sep ) {
 
-    //Check if custom titles are enabled from your option framework
-    if ( ot_get_option( 'enable_custom_titles' ) === 'on' ) {
-        //Some silly example
-        $name = get_bloginfo('name');
-		$description = get_bloginfo('description');
-		$page_title = wp_title('|',true,'right');
-		$title = $page_title.$name . " ~ ".$description;
-    }
+//     //Check if custom titles are enabled from your option framework
+//     if ( ot_get_option( 'enable_custom_titles' ) === 'on' ) {
+//         //Some silly example
+//         $name = get_bloginfo('name');
+// 		$description = get_bloginfo('description');
+// 		$page_title = wp_title('|',true,'right');
+// 		$title = $page_title.$name . " ~ ".$description;
+//     }
 
-    return $title;
-}
+//     return $title;
+// }
 
 
 add_action('after_setup_theme','custom_menus');
@@ -65,4 +65,32 @@ function custom_styles(){
 	wp_enqueue_style( 'bootstrap' );
 	wp_enqueue_style( 'modern-business' );
 
+}
+
+add_action('wp_enqueue_script','custom_script ');
+function custom_script(){
+	wp_deregister_script( 
+		'jQuery',
+		get_template_directory_uri()."/vendor/jquery/jquery.min.js",
+		[],
+		3.21,
+		true
+	 );
+	wp_retister_script(
+		'popper',
+		get_template_directory_uri()."/vendor/popper/popper.min.js",
+		[],
+		1.111,
+		true
+	);
+		wp_register_script(
+		'bootstrap',
+		get_template_directory_uri().'/vendor/bootstrap/js/bootstrap.min.js',
+		[],
+		4.0,
+		true
+	);
+	wp_enqueue_script('bootstrap');
+	wp_enqueue_script('jQuery');
+	wp_enqueue_script('popper');
 }

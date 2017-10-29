@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php wp_head(); ?>
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+<!-- sve ovo menja wp head -->
+    <title><?=custom_title();?> </title>
+
+       <!-- Bootstrap core CSS -->
+<!--   <link href="/wp-content/themes/basic-acf-portfolio/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+ -->
+    <!-- Custom styles for this template -->
+<!--     <link href="/wp-content/themes/basic-acf-portfolio/css/modern-business.css" rel="stylesheet"> -->
+  <?php wp_head(); ?>
+
+
+
+  
 </head>
 
   <body>
