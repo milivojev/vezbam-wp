@@ -30,6 +30,7 @@ Each post should be shown as a row-card, which contains the post name, 180char e
       <div class="row">
         <?php
          $curent_category = $wp_query->get_queried_object();
+       
 
          $curent_category_slug = $curent_category->slug;
           $args =[
@@ -43,7 +44,7 @@ Each post should be shown as a row-card, which contains the post name, 180char e
             $projects->the_post();
           ?>
         <div class="col-md-7">
-          <?php dump(get_field('hero_image'));?>
+        
           <a href="#">
             <img class="img-fluid rounded mb-3 mb-md-0" src="<?= get_field('hero_image')['sizes']['thumbnail'];?>" alt="">
           </a>
