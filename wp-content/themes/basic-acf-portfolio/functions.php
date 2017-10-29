@@ -94,7 +94,7 @@ function custom_script(){
 	wp_enqueue_script('jQuery');
 	wp_enqueue_script('popper');
 }
-add_image_size('Portfolio Featured',700, 500, true);
+add_image_size('Portfolio Featured',750, 500, true);
 add_image_size('Hero',1920, 1080, true);
 
 /**

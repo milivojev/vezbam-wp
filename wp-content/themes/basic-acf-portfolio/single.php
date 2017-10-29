@@ -71,6 +71,13 @@ Create a WP Query that returns 3 random posts from the same category.
 You will notice that since we only have three posts in each category (courtesy of homework #3), it will always show the same three posts, including the current page. Find a way to remove the current post from the results, so that we only show 2 posts. It is a pretty common procedure, google it.
  -->
 
+
+ <!-- Create a new ACF Group named Portfolio Item Page (you may already have one from the lecture). It should be applicable on all Posts. Also, don't forget to set the Group's Position and Style to High and Standard like we did in the class.
+
+    Create a custom field named Hero Image. Echo the image in the appropriate HTML section in the template. You can use any image. Verify that everything works. Image size used on the frontend should be Portfolio Featured. We did this in class.
+    In the previous homework, we made a query on the bottom of the template, that shows related posts. But you may have noticed that tey do not show any images. Replace the placeholder with the newly created custom field value, with the Thumbnail size image.
+ -->
+
     <!-- Page Content -->
     <div class="container">
     
@@ -91,19 +98,19 @@ You will notice that since we only have three posts in each category (courtesy o
       <div class="row">
 
         <div class="col-md-8">
-          <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+          <?php 
+            $hero = get_field('hero_image');
+           
+
+          ?>
+
+          <img class="img-fluid" src="<?= $hero['sizes']['Portfolio Featured'];?>" alt="<?= $hero['alt'] ;?>">
         </div>
 
         <div class="col-md-4">
           <h3 class="my-3">Project Description</h3>
           <p><?= get_the_content();?></p>
-          <h3 class="my-3">Project Details</h3>
-          <ul>
-            <li>Lorem Ipsum</li>
-            <li>Dolor Sit Amet</li>
-            <li>Consectetur</li>
-            <li>Adipiscing Elit</li>
-          </ul>
+         
         </div>
 
       </div>
@@ -130,9 +137,9 @@ You will notice that since we only have three posts in each category (courtesy o
           $related_projects->the_post();
 ?>
         <div class="col-md-3 col-sm-6 mb-4">
-          <a href="<?=get_permalink(); ?>">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-            <?php echo "<h6>".the_title()."</h6>"; ?>
+          <a href="<?=get_permalink(); ?>"> <?php echo "<h6>".excerpt(get_the_title(),30)."</h6>"; ?>
+            <img class="img-fluid" src="<?= get_field('hero_image')['sizes']['thumbnail'];?>" alt="<?= get_field('hero_image')['alt'];?>">
+           
           </a>
         </div>
 <?php endwhile;?>
