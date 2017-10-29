@@ -1,97 +1,63 @@
   <?php
     get_header();
+    the_post();
   ?>
   <!-- Page Content -->
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Portfolio 1
-        <small>Subheading</small>
+      <h1 class="mt-4 mb-3"><?=get_bloginfo('name');?>
+        <small><?=get_bloginfo('description');?></small>
       </h1>
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
+          <a href="<?= home_url();?>">Home</a>
         </li>
         <li class="breadcrumb-item active">Portfolio 1</li>
       </ol>
 
+<!-- 
+
+Write a query that outputs all posts from current category in the category.php template. The order should be by descending created date, so that we always have the newest post on top.
+
+For this query you will need the slug, id or the name of the current category and you can easily get that via $wp_query->get_queried_object() method.
+ -->
+
       <!-- Project One -->
       <div class="row">
+        <?php
+         $curent_category = $wp_query->get_queried_object();
+         $curent_category_slug = $curent_category->slug;
+          $args =[
+            'post_type'=>'post',
+            'category_name'=>$curent_category_slug,
+            'order'=>'DESC'
+
+          ];
+          $projects = new WP_Query($args);
+          while($projects->have_posts()):
+            $projects->the_post();
+          ?>
         <div class="col-md-7">
           <a href="#">
             <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
           </a>
         </div>
         <div class="col-md-5">
-          <h3>Project One</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-          <a class="btn btn-primary" href="#">View Project
+          <h3><?php the_title();?></h3>
+          <p><?= excerpt(get_the_content());?></p>
+          <a class="btn btn-primary" href="<?= get_permalink() ?>">View Project
             <span class="glyphicon glyphicon-chevron-right"></span>
           </a>
         </div>
+      <?php endwhile;?>
       </div>
       <!-- /.row -->
 
       <hr>
 
-      <!-- Project Two -->
-      <div class="row">
-        <div class="col-md-7">
-          <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-          </a>
-        </div>
-        <div class="col-md-5">
-          <h3>Project Two</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
-          <a class="btn btn-primary" href="#">View Project
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </div>
-      </div>
-      <!-- /.row -->
-
-      <hr>
-
-      <!-- Project Three -->
-      <div class="row">
-        <div class="col-md-7">
-          <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-          </a>
-        </div>
-        <div class="col-md-5">
-          <h3>Project Three</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!</p>
-          <a class="btn btn-primary" href="#">View Project
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </div>
-      </div>
-      <!-- /.row -->
-
-      <hr>
-
-      <!-- Project Four -->
-      <div class="row">
-
-        <div class="col-md-7">
-          <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-          </a>
-        </div>
-        <div class="col-md-5">
-          <h3>Project Four</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit?</p>
-          <a class="btn btn-primary" href="#">View Project
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </div>
-      </div>
-      <!-- /.row -->
-
-      <hr>
+      
 
       <!-- Pagination -->
       <ul class="pagination justify-content-center">
