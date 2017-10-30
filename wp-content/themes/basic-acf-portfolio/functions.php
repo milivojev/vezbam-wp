@@ -56,12 +56,12 @@ function custom_styles(){
 		  4.0, 
 		  $media = 'all'
 		   );
-	wp_register_style( 
+	wp_register_style(
 		'modern-business',
-		get_template_directory_uri().'css/medern-business.css',
+		get_template_directory_uri().'/css/modern-business.css',
 		['bootstrap'],
-		 1.0,
-		  $media = 'all' );
+		1.0
+	);
 	wp_enqueue_style( 'bootstrap' );
 	wp_enqueue_style( 'modern-business' );
 
