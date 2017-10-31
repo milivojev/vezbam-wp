@@ -97,6 +97,15 @@ function custom_script(){
 add_image_size('Portfolio Featured',750, 500, true);
 add_image_size('Hero',1920, 1080, true);
 
+
+// To register your Google API key, please use the ‘acf/fields/google_map/api’ filter like so:
+function my_acf_init() {
+	
+	acf_update_setting('google_api_key', 'AIzaSyBTl_QWzwyGcphDMdT05-lvPxxwxAQYcq0');
+}
+
+add_action('acf/init', 'my_acf_init');
+
 /**
 
      * We all need a debug method. The second parameter is optional
