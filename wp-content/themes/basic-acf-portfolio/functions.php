@@ -101,7 +101,7 @@ add_image_size('Hero',1920, 1080, true);
 // To register your Google API key, please use the ‘acf/fields/google_map/api’ filter like so:
 function my_acf_init() {
 	
-	acf_update_setting('google_api_key', 'AIzaSyBTl_QWzwyGcphDMdT05-lvPxxwxAQYcq0');
+	acf_update_setting('google_api_key', 'AIzaSyDs09UnmSHTn45QP-3GYfcv27rzhMdovPc');
 }
 
 add_action('acf/init', 'my_acf_init');

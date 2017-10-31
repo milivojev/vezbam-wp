@@ -41,7 +41,7 @@
         </div>
         <!-- Contact Details Column -->
         <div class="col-lg-4 mb-4">
-          mama
+          <?=the_content();?>
         </div>
       </div>
       <!-- /.row -->
